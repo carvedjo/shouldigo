@@ -20,10 +20,10 @@ type Recomendacao = {
 
 function getQualidadeAr(aqi: number): string {
   if (aqi <= 20) return 'Excelente'
-  if (aqi <= 40) return 'Boa'
+  if (aqi <= 40) return 'Bom'
   if (aqi <= 60) return 'Razoável'
-  if (aqi <= 80) return 'Fraca'
-  if (aqi <= 100) return 'Má'
+  if (aqi <= 80) return 'Fraco'
+  if (aqi <= 100) return 'Mau'
   return 'Muito má'
 }
 
@@ -33,7 +33,7 @@ function getRecomendacao(clima: DadosClima, ar: DadosAr): Recomendacao {
   if (ar.aqi > 100 || clima.precipitacao > 5 || clima.vento > 50) {
     return {
       semaforo: 'vermelho',
-      titulo: 'Fica em casa',
+      titulo: 'Péssimo',
       descricao: 'Condições adversas. Evita atividade ao ar livre.',
       qualidadeAr,
     }
@@ -50,7 +50,7 @@ function getRecomendacao(clima: DadosClima, ar: DadosAr): Recomendacao {
 
   return {
     semaforo: 'verde',
-    titulo: 'Podes sair!',
+    titulo: 'Ótimo',
     descricao: 'Boas condições para atividade ao ar livre.',
     qualidadeAr,
   }
