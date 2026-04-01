@@ -1,0 +1,65 @@
+.card {
+  background-color: white;
+  border: 1px solid #d1fae5;
+  border-radius: 10px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  margin-top: 12px;
+}
+
+.card:hover {
+  border-color: #86efac;
+}
+
+.aberto {
+  border-color: #16a34a;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #16a34a;
+  flex: 1;
+}
+
+.valor {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #14532d;
+}
+
+.seta {
+  font-size: 0.7rem;
+  color:#16a34a;
+}
+
+.detalhes {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #d1fae5;
+}
+
+.detalheItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalheLabel {
+  font-size: 0.75rem;
+  color: #16a34a;
+}
+
+.detalheValor {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #14532d;
+}

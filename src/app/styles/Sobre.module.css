@@ -1,0 +1,45 @@
+.main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  min-height: calc(100vh - 120px);
+}
+
+.titulo {
+  font-size: 2.5rem;
+  color: #fff896;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.box {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.boxTitulo {
+  font-size: 1.2rem;
+  color: #14532d;
+  margin-bottom: 12px;
+}
+
+.texto {
+  font-size: 0.95rem;
+  color: #166534;
+  line-height: 1.7;
+  font-family: 'Lato', sans-serif;
+}
+.voltar {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #e7ffc9;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.voltar:hover {
+  color: #3ffb8a;
+}

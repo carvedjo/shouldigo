@@ -1,0 +1,25 @@
+.footer {
+  text-align: right;
+  padding: 10px;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.texto {
+  font-size: 0.85rem;
+  color: #a0ffa076;
+  margin-bottom: 4px;
+  font-family: 'Lato', sans-serif;
+}
+
+.link {
+  color: #46fd89a4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

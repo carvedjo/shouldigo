@@ -1,65 +1,80 @@
-import Image from "next/image";
+import Link from "next/link"
+import getCoordenadas from "./lib/geocoding"
+import getClima from "./lib/openmeteo"
+import getAr from "./lib/ar"
+import getRecomendacao from "./lib/recomended"
+import styles from "./styles/Home.module.css"
+import SearchBar from "./components/SearchBar"
+import IconClima from "./components/IconClima"
+import getIconClima from "./lib/IconClima"
 
-export default function Home() {
+const cidades = [
+  { nome: "Lisboa", pesquisa: "Lisboa" },
+  { nome: "Porto", pesquisa: "Porto" },
+  { nome: "Braga", pesquisa: "Braga" },
+  { nome: "Coimbra", pesquisa: "Coimbra" },
+  { nome: "Faro", pesquisa: "Faro" },
+  { nome: "Évora", pesquisa: "Evora" },
+  { nome: "Viseu", pesquisa: "Viseu" },
+  { nome: "Setúbal", pesquisa: "Setubal" },
+]
+
+async function Home() {
+  const dadosCidades = await Promise.all(
+    cidades.map(async (cidade) => {
+      const coordenadas = await getCoordenadas(cidade.pesquisa)
+      if (!coordenadas) return null
+
+      const clima = await getClima(coordenadas.latitude, coordenadas.longitude)
+      const ar = await getAr(coordenadas.latitude, coordenadas.longitude)
+      const recomendacao = getRecomendacao(clima, ar)
+
+
+      return {
+        nome: cidade.nome,
+        weatherCode: clima.weatherCode,
+        pesquisa: cidade.pesquisa,
+        temperatura: clima.temperatura,
+        vento: clima.vento,
+        recomendacao,
+      }
+    })
+  )
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <h1 className={styles.titulo}>Should we go outside today?</h1>
+        <p className={styles.subtitulo}>
+          Qualidade do ar e clima em tempo real
+        </p>
+        <SearchBar />
+        <h2 className={styles.painelTitulo}>Cidades em destaque</h2>
+
+        <div className={styles.grid}>
+          {dadosCidades.map((cidade) => {
+            if (!cidade) return null
+            return (
+              <Link key={cidade.nome} href={`/cidade/${cidade.pesquisa}`} className={styles.card}>
+                <IconClima src={getIconClima(cidade.weatherCode)} tamanho={70} />
+                <div className={styles.cardTextos}>
+                  <p className={styles.cidadeNome}>{cidade.nome}</p>
+                  <span className={`${styles.badge} ${styles[cidade.recomendacao.semaforo]}`}>
+                    {cidade.recomendacao.titulo}
+                  </span>
+                  <div className={styles.meta}>
+                    <p className={styles.metaTexto}>{cidade.temperatura}°C</p>
+                    <p className={styles.metaTexto}>Ar: {cidade.recomendacao.qualidadeAr}</p>
+                  </div>
+                </div>
+                
+              </Link>
+            )
+          })}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+      </div>
+    </main>
+  )
 }
+
+export default Home

@@ -1,0 +1,128 @@
+.main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 24px;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.voltar {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: #e7ffc9;
+  text-decoration: none;
+  margin-bottom: 24px;
+}
+
+.voltar:hover {
+  color: #3ffb8a;
+}
+
+.cidade {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #fff896;
+  margin-bottom: 4px;
+}
+
+.atualizado {
+  font-size: 0.85rem;
+  color: #86efac;
+}
+
+.semaforo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 4px solid;
+}
+
+.verde {
+  background-color: #dcfce7;
+  border-color: #16a34a;
+}
+
+.amarelo {
+  background-color: #fef9c3;
+  border-color: #ca8a04;
+}
+
+.vermelho {
+  background-color: #fee2e2;
+  border-color: #dc2626;
+}
+
+.semaforoIcone {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.verde .semaforoIcone {
+  background-color: #16a34a;
+}
+
+.amarelo .semaforoIcone {
+  background-color: #ca8a04;
+}
+
+.vermelho .semaforoIcone {
+  background-color: #dc2626;
+}
+
+.semaforoTitulo {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #14532d;
+  margin-bottom: 4px;
+}
+
+.semaforoDescricao {
+  font-size: 0.9rem;
+  color: #166534;
+}
+
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metrica {
+  background-color: white;
+  border: 1px solid #86efac;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.metricaLabel {
+  font-size: 0.75rem;
+  color: #16a34a;
+  margin-bottom: 6px;
+}
+
+.metricaValor {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #14532d;
+}
+
+.metricaUnidade {
+  font-size: 0.75rem;
+  color: #16a34a;
+}
+
+@media (max-width: 768px) {
+  .metricas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
