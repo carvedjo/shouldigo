@@ -9,20 +9,20 @@ import IconClima from "./components/IconClima"
 import getIconClima from "./lib/IconClima"
 
 const cidades = [
-  { nome: "Lisboa", pesquisa: "Lisboa" },
-  { nome: "Porto", pesquisa: "Porto" },
-  { nome: "Braga", pesquisa: "Braga" },
-  { nome: "Coimbra", pesquisa: "Coimbra" },
-  { nome: "Faro", pesquisa: "Faro" },
-  { nome: "Évora", pesquisa: "Evora" },
-  { nome: "Viseu", pesquisa: "Viseu" },
-  { nome: "Setúbal", pesquisa: "Setubal" },
+  { nome: "Lisboa"},
+  { nome: "Porto"},
+  { nome: "Braga"},
+  { nome: "Coimbra"},
+  { nome: "Faro"},
+  { nome: "Évora"},
+  { nome: "Viseu"},
+  { nome: "Setúbal"},
 ]
 
 async function Home() {
   const dadosCidades = await Promise.all(
     cidades.map(async (cidade) => {
-      const coordenadas = await getCoordenadas(cidade.pesquisa)
+      const coordenadas = await getCoordenadas(cidade.nome)
       if (!coordenadas) return null
 
       const clima = await getClima(coordenadas.latitude, coordenadas.longitude)
@@ -33,7 +33,6 @@ async function Home() {
       return {
         nome: cidade.nome,
         weatherCode: clima.weatherCode,
-        pesquisa: cidade.pesquisa,
         temperatura: clima.temperatura,
         vento: clima.vento,
         recomendacao,
@@ -55,7 +54,7 @@ async function Home() {
           {dadosCidades.map((cidade) => {
             if (!cidade) return null
             return (
-              <Link key={cidade.nome} href={`/cidade/${cidade.pesquisa}`} className={styles.card}>
+              <Link key={cidade.nome} href={`/cidade/${cidade.nome}`} className={styles.card}>
                 <IconClima src={getIconClima(cidade.weatherCode)} tamanho={70} />
                 <div className={styles.cardTextos}>
                   <p className={styles.cidadeNome}>{cidade.nome}</p>
