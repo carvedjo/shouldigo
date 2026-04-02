@@ -9,29 +9,30 @@ import IconClima from "./components/IconClima"
 import getIconClima from "./lib/IconClima"
 
 const cidades = [
-  { nome: "Lisboa"},
-  { nome: "Porto"},
-  { nome: "Braga"},
-  { nome: "Coimbra"},
-  { nome: "Faro"},
-  { nome: "Évora"},
-  { nome: "Viseu"},
-  { nome: "Setúbal"},
+  { nome: "Lisboa", latitude: 38.7223, longitude: -9.1393 },
+  { nome: "Porto", latitude: 41.1579, longitude: -8.6291 },
+  { nome: "Braga", latitude: 41.5454, longitude: -8.4265 },
+  { nome: "Coimbra", latitude: 40.2033, longitude: -8.4103 },
+  { nome: "Faro", latitude: 37.0194, longitude: -7.9304 },
+  { nome: "Évora", latitude: 38.5714, longitude: -7.9135 },
+  { nome: "Viseu", latitude: 40.6610, longitude: -7.9097 },
+  { nome: "Setúbal", latitude: 38.5244, longitude: -8.8882 },
 ]
 
 async function Home() {
   const dadosCidades = await Promise.all(
     cidades.map(async (cidade) => {
-      const coordenadas = await getCoordenadas(cidade.nome)
-      if (!coordenadas) return null
+      const { latitude, longitude } = cidade
 
-      const clima = await getClima(coordenadas.latitude, coordenadas.longitude)
-      const ar = await getAr(coordenadas.latitude, coordenadas.longitude)
+      const clima = await getClima(latitude, longitude)
+      const ar = await getAr(latitude, longitude)
       const recomendacao = getRecomendacao(clima, ar)
 
 
       return {
         nome: cidade.nome,
+        latitude: cidade.latitude,
+        longitude: cidade.longitude,
         weatherCode: clima.weatherCode,
         temperatura: clima.temperatura,
         vento: clima.vento,
@@ -54,7 +55,7 @@ async function Home() {
           {dadosCidades.map((cidade) => {
             if (!cidade) return null
             return (
-              <Link key={cidade.nome} href={`/cidade/${cidade.nome}`} className={styles.card}>
+              <Link key={cidade.nome} href={`/cidade/${cidade.nome}?lat=${cidade.latitude}&lon=${cidade.longitude}`} className={styles.card}>
                 <IconClima src={getIconClima(cidade.weatherCode)} tamanho={70} />
                 <div className={styles.cardTextos}>
                   <p className={styles.cidadeNome}>{cidade.nome}</p>
