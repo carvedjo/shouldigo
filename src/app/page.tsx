@@ -7,6 +7,7 @@ import styles from "./styles/Home.module.css"
 import SearchBar from "./components/SearchBar"
 import IconClima from "./components/IconClima"
 import getIconClima from "./lib/IconClima"
+export const revalidate = 600
 
 const cidades = [
   { nome: "Lisboa", latitude: 38.7223, longitude: -9.1393 },
