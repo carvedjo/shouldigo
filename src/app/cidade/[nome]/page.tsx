@@ -20,13 +20,23 @@ async function CidadePage({ params }: Props) {
   const coordenadas = await getCoordenadas(nomeDecodificado)
 
   if (!coordenadas) {
-    return <div>Cidade não encontrada</div>
+    return (
+      <main className={styles.main}>
+        <Link href="/" className={styles.voltar}>← Voltar</Link>
+        <div className={styles.notfound}>
+        <h1 className={styles.cidade}>Cidade não encontrada</h1>
+        <p style={{ color: 'white', marginTop: '12px' , fontFamily: 'Lato' }}>
+          Tenta pesquisar com o nome completo.
+        </p>
+        </div>
+      </main>
+    )
   }
 
   const clima = await getClima(coordenadas.latitude, coordenadas.longitude)
   const ar = await getAr(coordenadas.latitude, coordenadas.longitude)
   const recomendacao = getRecomendacao(clima, ar)
-  const icon = getIconClima(clima.weatherCode)
+  const icon = getIconClima(clima.weatherCode, clima.isDay)
 
   return (
   <main className={styles.main}>

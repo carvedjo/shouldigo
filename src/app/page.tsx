@@ -35,6 +35,7 @@ async function Home() {
         latitude: cidade.latitude,
         longitude: cidade.longitude,
         weatherCode: clima.weatherCode,
+        is_day: clima.isDay,
         temperatura: clima.temperatura,
         vento: clima.vento,
         recomendacao,
@@ -57,7 +58,7 @@ async function Home() {
             if (!cidade) return null
             return (
               <Link key={cidade.nome} href={`/cidade/${cidade.nome}?lat=${cidade.latitude}&lon=${cidade.longitude}`} className={styles.card}>
-                <IconClima src={getIconClima(cidade.weatherCode)} tamanho={70} />
+                <IconClima src={getIconClima(cidade.weatherCode, cidade.is_day)} tamanho={70} />
                 <div className={styles.cardTextos}>
                   <p className={styles.cidadeNome}>{cidade.nome}</p>
                   <span className={`${styles.badge} ${styles[cidade.recomendacao.semaforo]}`}>

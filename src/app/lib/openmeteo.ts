@@ -1,5 +1,5 @@
 async function getClima(latitude: number, longitude: number) {
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,precipitation,relative_humidity_2m,weather_code&timezone=Europe/Lisbon`
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m,precipitation,relative_humidity_2m,weather_code,is_day&timezone=Europe/Lisbon`
   
 
   const resposta = await fetch(url)
@@ -12,6 +12,7 @@ return {
   precipitacao: dados.current.precipitation,
   humidade: dados.current.relative_humidity_2m,
   weatherCode: dados.current.weather_code,
+  isDay: dados.current.is_day,
 }
 }
 

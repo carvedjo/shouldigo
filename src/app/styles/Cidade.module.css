@@ -120,6 +120,14 @@
   font-size: 0.75rem;
   color: #16a34a;
 }
+.notfound{
+  padding: 16px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
 
 @media (max-width: 768px) {
   .metricas {
