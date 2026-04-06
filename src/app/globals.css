@@ -19,7 +19,7 @@ body {
   min-height: 100vh;
   font-family: 'Bebas Neue', sans-serif;
   background-color: var(--background);
-  background-image: url('/imgs/background-img.webP');
+  background-image: url('/imgs/background-img.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
