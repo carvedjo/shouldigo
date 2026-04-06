@@ -27,6 +27,7 @@ async function Home() {
 
       const clima = await getClima(latitude, longitude)
       const ar = await getAr(latitude, longitude)
+      if (!clima || !ar) return null
       const recomendacao = getRecomendacao(clima, ar)
 
 

@@ -22,7 +22,9 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
-        {children}
+        <div style={{ flex: 1 }}>
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

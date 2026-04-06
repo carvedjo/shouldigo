@@ -10,7 +10,7 @@
 .texto {
   font-size: 0.85rem;
   color: #a0ffa076;
-  margin-bottom: 4px;
+  margin: 0;
   font-family: 'Lato', sans-serif;
 }
 
@@ -22,4 +22,16 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  
+  .footer {
+    text-align: center;
+    
+
+  }
+  .texto{
+    font-size: 0.60rem;
+  }
 }

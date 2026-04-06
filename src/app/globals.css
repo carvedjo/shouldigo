@@ -14,13 +14,17 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: 'Bebas Neue', sans-serif;
   background-color: var(--background);
-  background-image: url('/imgs/background-img.jpg');
+  background-image: url('/imgs/background-img.webP');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   color: var(--foreground);
+  
 }
 h1, h2, p {
   font-family: 'Bebas Neue', sans-serif;

@@ -7,6 +7,7 @@ import DetalhesAr from "../../components/DetalhesAr"
 import styles from "../../styles/Cidade.module.css"
 import IconClima from "../../components/IconClima"
 import getIconClima from "../../lib/IconClima"
+export const revalidate = 600
 
 type Props = {
   params: Promise<{
@@ -35,6 +36,16 @@ async function CidadePage({ params }: Props) {
 
   const clima = await getClima(coordenadas.latitude, coordenadas.longitude)
   const ar = await getAr(coordenadas.latitude, coordenadas.longitude)
+  if (!clima || !ar) {
+  return (
+    <main className={styles.main}>
+      <Link href="/" className={styles.voltar}>← Voltar</Link>
+      <p style={{ color: 'white' }}>
+        Não foi possível obter os dados. Tenta novamente mais tarde.
+      </p>
+    </main>
+  )
+  }
   const recomendacao = getRecomendacao(clima, ar)
   const icon = getIconClima(clima.weatherCode, clima.isDay)
 
@@ -43,7 +54,9 @@ async function CidadePage({ params }: Props) {
     <Link href="/" className={styles.voltar}>← Voltar</Link>
     <div className={styles.header}>
       <h1 className={styles.cidade}>{coordenadas.nome}, {coordenadas.pais}</h1>
-      <p className={styles.atualizado}>Atualizado agora</p>
+      <p className={styles.atualizado}>
+        Atualizado às {new Date().toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })}
+      </p>
       
     </div>
 

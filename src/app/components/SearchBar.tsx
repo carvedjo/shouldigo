@@ -11,7 +11,7 @@ function SearchBar() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!cidade.trim()) return
-    router.push(`/cidade/${cidade}`)
+    router.push(`/cidade/${encodeURIComponent(cidade.trim())}`)
   }
 
   return (
